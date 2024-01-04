@@ -31,8 +31,8 @@ public class InputManager : MonoBehaviour
     if(playerControls == null)
     {
         playerControls = new PlayerControls();
-        playerControls.PlayerMovement.Movement.started += ctx => movementInput = ctx.ReadValue<Vector2>();
-        playerControls.PlayerMovement.Movement.canceled += ctx => movementInput = Vector2.zero;
+        playerControls.PlayerMovement.Movement.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
+        //playerControls.PlayerMovement.Movement.canceled += ctx => movementInput = Vector2.zero;
         playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue <Vector2>();
 
         playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;

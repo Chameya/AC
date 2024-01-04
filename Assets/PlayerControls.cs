@@ -29,7 +29,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
             ""actions"": [
                 {
                     ""name"": ""Movement"",
-                    ""type"": ""Value"",
+                    ""type"": ""PassThrough"",
                     ""id"": ""14652260-6e99-4ef2-b587-bf44552c3662"",
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
@@ -61,7 +61,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""up"",
                     ""id"": ""6505b238-bf17-46e4-a308-81d43c143449"",
-                    ""path"": ""<Keyboard>/z"",
+                    ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -83,7 +83,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": ""left"",
                     ""id"": ""53011a8b-5eb3-40a6-9424-cc36f2f007c0"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
