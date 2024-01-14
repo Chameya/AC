@@ -30,7 +30,7 @@ namespace YesserOthmene
             enemyRB = GetComponent<Rigidbody>();
             enemyManager= GetComponent<EnemyManager>();
             enemyAnimatorManager= GetComponent<EnemyAnimatorManager>();
-            navMeshAgent= GetComponentInChildren<NavMeshAgent>();
+            navMeshAgent = GetComponentInChildren<NavMeshAgent>();
         }
 
         private void Start()
