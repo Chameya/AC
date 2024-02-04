@@ -21,8 +21,8 @@ public class AnimatorManager : MonoBehaviour
 
     public void PlayTargetAnimation(string targetAnimation, bool isInteracting, bool useRootMotion = false)
     {
-        animator.SetBool("isInteracting",isInteracting);
-        animator.SetBool("isUsingRootMotion",useRootMotion);
+        animator.SetBool("IsInteracting",isInteracting);
+        animator.SetBool("IsUsingRootMotion",useRootMotion);
         animator.CrossFade(targetAnimation,0.2f);
 
     }

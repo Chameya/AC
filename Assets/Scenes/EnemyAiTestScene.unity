@@ -382,6 +382,10 @@ MonoBehaviour:
   enemyRB: {fileID: 0}
   playerRotation: {x: 0, y: 0, z: 0, w: 0}
   distanceFromTarget: 0
+  currentAttack: {fileID: 0}
+  enemyAttacks:
+  - {fileID: 11400000, guid: eec6a27dcb956ed4aa68acb3073894c9, type: 2}
+  - {fileID: 11400000, guid: 1f3c8e5348f95ed4db6ef5b8826da00f, type: 2}
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -393,6 +397,7 @@ MonoBehaviour:
   maxDist: 10
   detectionRadius: 2
   obstacleDetectionLength: 3
+  currentRecoveryTime: 0
   tiltAngle: 30
   useVelocityChange: 1
 --- !u!114 &64336044
@@ -5772,7 +5777,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &635932417635254126
 GameObject:
   m_ObjectHideFlags: 0

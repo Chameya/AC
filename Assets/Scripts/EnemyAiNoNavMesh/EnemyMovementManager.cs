@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 namespace YesserOthmene
 {
@@ -18,6 +17,9 @@ namespace YesserOthmene
 
         public float distanceFromTarget;
 
+        [SerializeField] EnemyAttackAction currentAttack;
+        [SerializeField] EnemyAttackAction[] enemyAttacks;
+
         [Header("Ai Settings")]
         [Space]
         [SerializeField] LayerMask targetLayerMask;
@@ -28,26 +30,51 @@ namespace YesserOthmene
         [SerializeField] float maxDist; //For max detection range
         [SerializeField] float detectionRadius; // For the size of the detection area (Circle radius)
         [SerializeField] float obstacleDetectionLength;
+        [SerializeField] float currentRecoveryTime = 0;
         [Range(0f, 90f), SerializeField] float tiltAngle; //used for the angle of the left and right Rays
         [Space]
         public bool useVelocityChange;
 
         private void Awake()
         {
-            enemyAnimatorManager= GetComponent<EnemyAnimatorManagerNoNavMesh>();
+            enemyAnimatorManager = GetComponent<EnemyAnimatorManagerNoNavMesh>();
             enemyRB = GetComponent<Rigidbody>();
+        }
+        private void Start()
+        {
+            isPreformingAction = false;
+        }
+
+        private void Update()
+        {
+            HandleRecoveryTimer();
         }
 
         private void FixedUpdate()
         {
+            HandleCurrentAction();
+        }
+
+        private void HandleCurrentAction()
+        {
+            if (currentAttack!= null)
+                distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
             playerRotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z);
+
             if (currentTarget == null)
             {
+                //! Find player
                 DetectPlayer();
             }
-            else
+            else if (distanceFromTarget > stoppingDistance)
             {
+                //! Move towards player
                 MoveTowardsPlayer();
+            }
+            else if (distanceFromTarget <= stoppingDistance)
+            {
+                //! Handle our attacks
+                AttackTarget();
             }
         }
 
@@ -67,6 +94,9 @@ namespace YesserOthmene
         }
         private void MoveTowardsPlayer()
         {
+            if (isPreformingAction)
+                return;
+
             distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
 
             //If the enemy is preforming an action, stop the movement !
@@ -76,11 +106,11 @@ namespace YesserOthmene
             }
             else
             {
-                if (distanceFromTarget > stoppingDistance)
+                if (distanceFromTarget >= stoppingDistance)
                 {
                     enemyAnimatorManager.animator.SetFloat("Vertical", 1, 0.1f, Time.deltaTime);
                 }
-                else if (distanceFromTarget <= stoppingDistance)
+                else if (distanceFromTarget < stoppingDistance)
                 {
                     enemyAnimatorManager.animator.SetFloat("Vertical", 0, 0.1f, Time.deltaTime);
                     //TO DO! Hit Player
@@ -88,7 +118,6 @@ namespace YesserOthmene
             }
             RotateTowardsTarget();
         }
-
         private void RotateTowardsTarget()
         {
             Quaternion rotationRight = Quaternion.Euler(0f, tiltAngle, 0f);
@@ -141,5 +170,91 @@ namespace YesserOthmene
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed / Time.deltaTime);
             }
         }
+
+        private void HandleRecoveryTimer()
+        {
+            if (currentRecoveryTime > 0)
+            {
+                currentRecoveryTime -= Time.deltaTime;
+            }
+            if (isPreformingAction)
+            {
+                if (currentRecoveryTime <= 0)
+                {
+                    isPreformingAction = false;
+                }
+            }
+        }
+
+        #region Attacks
+
+        private void AttackTarget()
+        {
+            if (isPreformingAction)
+                return;
+
+            if (currentAttack == null)
+            {
+                GetNewAttack();
+            }
+            else
+            {
+                isPreformingAction = true;
+                currentRecoveryTime = currentAttack.recoveryTime;
+                enemyAnimatorManager.PlayTargetAnimation(currentAttack.actionAnimation, true);
+            }
+        }
+
+        private void GetNewAttack()
+        {
+            Vector3 targetDirection = currentTarget.transform.position - transform.position;
+            float viewableAngle = Vector3.Angle(targetDirection, transform.forward);
+            distanceFromTarget = Vector3.Distance(currentTarget.transform.position, transform.position);
+
+            int maxScore = 0;
+
+            for (int i = 0; i < enemyAttacks.Length; i++)
+            {
+                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+
+                if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
+                    distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+                {
+                    if (viewableAngle <= enemyAttackAction.maximumAttackAngle &&
+                       viewableAngle >= enemyAttackAction.minimumAttackAngle)
+                    {
+                        maxScore += enemyAttackAction.attackScore;
+                    }
+                }
+            }
+            int randomValue = Random.Range(0, maxScore);
+            int tempScore = 0;
+
+            for (int i = 0; i < enemyAttacks.Length; i++)
+            {
+                EnemyAttackAction enemyAttackAction = enemyAttacks[i];
+
+                if (distanceFromTarget <= enemyAttackAction.maximumDistanceNeededToAttack &&
+                    distanceFromTarget >= enemyAttackAction.minimumDistanceNeededToAttack)
+                {
+                    if (viewableAngle <= enemyAttackAction.maximumAttackAngle &&
+                       viewableAngle >= enemyAttackAction.minimumAttackAngle)
+                    {
+                        if (currentAttack != null)
+                            return;
+                        tempScore += enemyAttackAction.attackScore;
+
+                        if (tempScore > randomValue)
+                        {
+                            currentAttack = enemyAttackAction;
+                        }
+                    }
+                }
+            }
+
+        }
+
+
+        #endregion
     }
 }
