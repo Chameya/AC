@@ -11,6 +11,7 @@ namespace YesserOthmene
         CameraManager cameraManager;
         PlayerLocomotion playerLocomotion;
 
+        [HideInInspector]
         public bool isInteracting;
 
         private void Awake()

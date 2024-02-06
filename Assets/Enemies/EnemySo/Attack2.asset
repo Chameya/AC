@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Attack2
   m_EditorClassIdentifier: 
   actionAnimation: Standing Melee Attack Backhand
+  attackDamage: 5
   attackScore: 5
   recoveryTime: 1
   maximumAttackAngle: 35

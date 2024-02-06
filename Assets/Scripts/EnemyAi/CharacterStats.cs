@@ -6,6 +6,16 @@ namespace YesserOthmene
 {
     public class CharacterStats : MonoBehaviour
     {
+        public int maxHealth;
+        public int health;
+
+        private void Update()
+        {
+            if (health <= 0)
+            {
+                Debug.Log("Dead");
+            }
+        }
 
     }
 }

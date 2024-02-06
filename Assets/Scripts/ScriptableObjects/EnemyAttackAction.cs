@@ -7,6 +7,7 @@ namespace YesserOthmene
     [CreateAssetMenu(menuName = "ScriptableObjects/Enemy/EnemyAttackAction")]
     public class EnemyAttackAction : EnemyActions
     {
+        public int attackDamage;
         public int attackScore = 3;
         public float recoveryTime = 2;
 

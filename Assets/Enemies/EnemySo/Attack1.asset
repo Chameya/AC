@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Attack1
   m_EditorClassIdentifier: 
   actionAnimation: Standing Melee Attack Downward
+  attackDamage: 5
   attackScore: 3
-  recoveryTime: 1
+  recoveryTime: 2.02
   maximumAttackAngle: 35
   minimumAttackAngle: -35
   minimumDistanceNeededToAttack: 0

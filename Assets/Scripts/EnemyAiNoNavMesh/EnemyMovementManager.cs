@@ -17,7 +17,7 @@ namespace YesserOthmene
 
         public float distanceFromTarget;
 
-        [SerializeField] EnemyAttackAction currentAttack;
+        public EnemyAttackAction currentAttack;
         [SerializeField] EnemyAttackAction[] enemyAttacks;
 
         [Header("Ai Settings")]
@@ -77,7 +77,6 @@ namespace YesserOthmene
                 AttackTarget();
             }
         }
-
         private void DetectPlayer()
         {
             Ray ray = new Ray(transform.position - (transform.forward * detectionRadius), transform.forward);
@@ -154,7 +153,6 @@ namespace YesserOthmene
             }
             else
             {
-                Debug.Log("Rotating Manual");
                 //Rotate the enemy towards the player
 
                 Vector3 direction = currentTarget.transform.position - transform.position;
@@ -170,7 +168,6 @@ namespace YesserOthmene
                 transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed / Time.deltaTime);
             }
         }
-
         private void HandleRecoveryTimer()
         {
             if (currentRecoveryTime > 0)
