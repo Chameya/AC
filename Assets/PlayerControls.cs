@@ -264,6 +264,51 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""LightAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""58c5af22-aacd-4d9e-a52a-a4352c74d7f0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""HeavyAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""ea318440-5eff-48cf-a187-ce92cfdb83c6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""FirstWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""7ed5793c-a708-4278-8516-90dc989664e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""SecondWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""7258c696-37f9-4460-b950-dde8adc0514e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ThirdWeapon"",
+                    ""type"": ""Button"",
+                    ""id"": ""80b54be0-8f72-4c99-bb76-745ed7a13b23"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -332,6 +377,61 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""action"": ""Punch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a0aad1b2-3091-4aca-b7ea-a8995a82f115"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HeavyAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2175d660-7e55-4956-a7b6-914c15bffa31"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SecondWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f27de75f-a511-4f21-8eba-78a2fd9ab79d"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ThirdWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1c3e0257-d203-4ee4-892c-bfea6671540a"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""LightAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""11a62238-9f01-4683-aa0f-38d8abfb7f28"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FirstWeapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -348,6 +448,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_PlayerActions_Jump = m_PlayerActions.FindAction("Jump", throwIfNotFound: true);
         m_PlayerActions_Dodge = m_PlayerActions.FindAction("Dodge", throwIfNotFound: true);
         m_PlayerActions_Punch = m_PlayerActions.FindAction("Punch", throwIfNotFound: true);
+        m_PlayerActions_LightAttack = m_PlayerActions.FindAction("LightAttack", throwIfNotFound: true);
+        m_PlayerActions_HeavyAttack = m_PlayerActions.FindAction("HeavyAttack", throwIfNotFound: true);
+        m_PlayerActions_FirstWeapon = m_PlayerActions.FindAction("FirstWeapon", throwIfNotFound: true);
+        m_PlayerActions_SecondWeapon = m_PlayerActions.FindAction("SecondWeapon", throwIfNotFound: true);
+        m_PlayerActions_ThirdWeapon = m_PlayerActions.FindAction("ThirdWeapon", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -452,6 +557,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_PlayerActions_Jump;
     private readonly InputAction m_PlayerActions_Dodge;
     private readonly InputAction m_PlayerActions_Punch;
+    private readonly InputAction m_PlayerActions_LightAttack;
+    private readonly InputAction m_PlayerActions_HeavyAttack;
+    private readonly InputAction m_PlayerActions_FirstWeapon;
+    private readonly InputAction m_PlayerActions_SecondWeapon;
+    private readonly InputAction m_PlayerActions_ThirdWeapon;
     public struct PlayerActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -460,6 +570,11 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Jump => m_Wrapper.m_PlayerActions_Jump;
         public InputAction @Dodge => m_Wrapper.m_PlayerActions_Dodge;
         public InputAction @Punch => m_Wrapper.m_PlayerActions_Punch;
+        public InputAction @LightAttack => m_Wrapper.m_PlayerActions_LightAttack;
+        public InputAction @HeavyAttack => m_Wrapper.m_PlayerActions_HeavyAttack;
+        public InputAction @FirstWeapon => m_Wrapper.m_PlayerActions_FirstWeapon;
+        public InputAction @SecondWeapon => m_Wrapper.m_PlayerActions_SecondWeapon;
+        public InputAction @ThirdWeapon => m_Wrapper.m_PlayerActions_ThirdWeapon;
         public InputActionMap Get() { return m_Wrapper.m_PlayerActions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -481,6 +596,21 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Punch.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnPunch;
                 @Punch.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnPunch;
                 @Punch.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnPunch;
+                @LightAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLightAttack;
+                @LightAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLightAttack;
+                @LightAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnLightAttack;
+                @HeavyAttack.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnHeavyAttack;
+                @HeavyAttack.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnHeavyAttack;
+                @FirstWeapon.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnFirstWeapon;
+                @FirstWeapon.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnFirstWeapon;
+                @FirstWeapon.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnFirstWeapon;
+                @SecondWeapon.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSecondWeapon;
+                @SecondWeapon.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSecondWeapon;
+                @SecondWeapon.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnSecondWeapon;
+                @ThirdWeapon.started -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnThirdWeapon;
+                @ThirdWeapon.performed -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnThirdWeapon;
+                @ThirdWeapon.canceled -= m_Wrapper.m_PlayerActionsActionsCallbackInterface.OnThirdWeapon;
             }
             m_Wrapper.m_PlayerActionsActionsCallbackInterface = instance;
             if (instance != null)
@@ -497,6 +627,21 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Punch.started += instance.OnPunch;
                 @Punch.performed += instance.OnPunch;
                 @Punch.canceled += instance.OnPunch;
+                @LightAttack.started += instance.OnLightAttack;
+                @LightAttack.performed += instance.OnLightAttack;
+                @LightAttack.canceled += instance.OnLightAttack;
+                @HeavyAttack.started += instance.OnHeavyAttack;
+                @HeavyAttack.performed += instance.OnHeavyAttack;
+                @HeavyAttack.canceled += instance.OnHeavyAttack;
+                @FirstWeapon.started += instance.OnFirstWeapon;
+                @FirstWeapon.performed += instance.OnFirstWeapon;
+                @FirstWeapon.canceled += instance.OnFirstWeapon;
+                @SecondWeapon.started += instance.OnSecondWeapon;
+                @SecondWeapon.performed += instance.OnSecondWeapon;
+                @SecondWeapon.canceled += instance.OnSecondWeapon;
+                @ThirdWeapon.started += instance.OnThirdWeapon;
+                @ThirdWeapon.performed += instance.OnThirdWeapon;
+                @ThirdWeapon.canceled += instance.OnThirdWeapon;
             }
         }
     }
@@ -512,5 +657,10 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnJump(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnPunch(InputAction.CallbackContext context);
+        void OnLightAttack(InputAction.CallbackContext context);
+        void OnHeavyAttack(InputAction.CallbackContext context);
+        void OnFirstWeapon(InputAction.CallbackContext context);
+        void OnSecondWeapon(InputAction.CallbackContext context);
+        void OnThirdWeapon(InputAction.CallbackContext context);
     }
 }

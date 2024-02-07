@@ -19,6 +19,15 @@ public class InputManager : MonoBehaviour
   [SerializeField] bool sprintInput;
   [SerializeField] bool dodgeInput;
   [SerializeField] bool jumpInput;
+  [SerializeField] bool lightAttackInput;
+  [SerializeField] bool heavyAttackInput;
+  [SerializeField] bool FirstWeaponInput;
+
+  public float jump; 
+  public float fire;// Light attack
+  public float fire1; // heavy attack
+  public float shift;
+  [HideInInspector]public float rawVertical , rawHorizontal;
 
   private void Awake()
   {
@@ -32,7 +41,6 @@ public class InputManager : MonoBehaviour
     {
         playerControls = new PlayerControls();
         playerControls.PlayerMovement.Movement.performed += ctx => movementInput = ctx.ReadValue<Vector2>();
-        //playerControls.PlayerMovement.Movement.canceled += ctx => movementInput = Vector2.zero;
         playerControls.PlayerMovement.Camera.performed += i => cameraInput = i.ReadValue <Vector2>();
 
         playerControls.PlayerActions.Sprint.performed += i => sprintInput = true;
@@ -43,6 +51,15 @@ public class InputManager : MonoBehaviour
 
         playerControls.PlayerActions.Jump.performed += i => jumpInput = true;
         playerControls.PlayerActions.Jump.canceled += i => jumpInput = false;
+
+        playerControls.PlayerActions.FirstWeapon.performed += i => FirstWeaponInput = true;
+        playerControls.PlayerActions.FirstWeapon.canceled += i => FirstWeaponInput = false;
+
+        playerControls.PlayerActions.LightAttack.performed += i => lightAttackInput = true;
+        playerControls.PlayerActions.LightAttack.canceled += i => lightAttackInput = false;
+
+        playerControls.PlayerActions.HeavyAttack.performed += i => heavyAttackInput = true;
+        playerControls.PlayerActions.HeavyAttack.canceled += i => heavyAttackInput = false;
     }
 
     playerControls.Enable();
@@ -60,6 +77,8 @@ private void OnDisable()
     HandleSprintingInput();
     HandleJumpingInput();
     HandleDodgeInput();
+    HandleLightAttackInput();
+    HandleHeavyAttackInput();
   }
 
   private void HandleMovementInput ()
@@ -103,4 +122,32 @@ private void OnDisable()
       playerLocomotion.HandleDodge();
     }
   }
+
+ private void HandleFirstWeaponInput()
+  {
+      if (FirstWeaponInput)
+      {
+          FirstWeaponInput = false;
+          playerLocomotion.HandleFirstWeapon();
+      }
+  }
+
+  private void HandleLightAttackInput()
+  {
+      if (lightAttackInput)
+      {
+          lightAttackInput = false;
+          playerLocomotion.HandleLightAttack();
+      }
+  }
+
+  private void HandleHeavyAttackInput()
+  {
+      if (heavyAttackInput)
+      {
+          heavyAttackInput = false;
+          playerLocomotion.HandleHeavyAttack();
+      }
+  }
+  
 }

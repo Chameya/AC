@@ -47,6 +47,7 @@ public class PlayerLocomotion : MonoBehaviour
     public void HandleAllMovement()
         {
             HandleFallingAndLanding();
+            
 
             if (playerManager.isInteracting)
                 return;
@@ -185,5 +186,29 @@ public class PlayerLocomotion : MonoBehaviour
             return;
 
         animatorManager.PlayTargetAnimation("Dodge",true, true);
+    }
+
+    public void HandleFirstWeapon()
+    {
+        if (playerManager.isInteracting)
+        return;
+
+        animatorManager.PlayTargetAnimation("Equip", true);
+    }
+
+    public void HandleLightAttack()
+    {
+        if (playerManager.isInteracting)
+        return;
+
+        animatorManager.PlayTargetAnimation("LightAttack", true);
+    }
+
+    public void HandleHeavyAttack()
+    {
+        if (playerManager.isInteracting)
+        return;
+
+        animatorManager.PlayTargetAnimation("HeavyAttack", true);
     }
 }

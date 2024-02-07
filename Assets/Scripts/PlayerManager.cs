@@ -9,8 +9,11 @@ public class PlayerManager : MonoBehaviour
     CameraManager cameraManager;
     PlayerLocomotion playerLocomotion;
 
+
     public bool isInteracting;
     public bool isUsingRootMotion;
+    [SerializeField] bool isLightAttacking;
+    [SerializeField] bool isHeavyAttacking;
 
     private void Awake()
     {
@@ -37,6 +40,21 @@ public class PlayerManager : MonoBehaviour
         isUsingRootMotion = animator.GetBool("isUsingRootMotion");
         playerLocomotion.isJumping = animator.GetBool("isJumping");
         animator.SetBool("isGrounded",playerLocomotion.isGrounded);
+    }
+
+   private void HandleCombatAnimations()
+    {
+        if (isLightAttacking)
+        {
+            animator.SetTrigger("LightAttack");
+            isLightAttacking = false;
+        }
+
+        if (isHeavyAttacking)
+        {
+            animator.SetTrigger("HeavyAttack");
+            isHeavyAttacking = false;
+        }
     }
 
 }
